@@ -92,28 +92,27 @@ const App = () => {
       </div>
       <ul className="task-list mt-4 w-full max-w-sm flex flex-col space-y-2">
         {timers.map(timer => (
-          <li
+            <li
             key={timer.id}
-            className={`flex justify-between items-start w-full transition duration-150 ease-in-out cursor-pointer ${activeTimer?.id === timer.id ? 'underline text-white' : 'text-gray-500 hover:text-white'}`}
+            className={`mr-2 flex justify-between items-start w-full transition duration-150 ease-in-out cursor-pointer ${activeTimer?.id === timer.id ? 'underline text-white' : 'text-gray-500 hover:text-white'}`}
             onClick={() => handleTimerClick(timer.id)}
-          >
+            >
             <span>{timer.title}</span>
-            <div className="flex">
-              <span>
-                {Math.floor(timer.seconds / 60)}m {timer.seconds % 60}s
+            <div className="flex items-center gap-2">
+              <span className="mx-1">
+              {Math.floor(timer.seconds / 60)}m {timer.seconds % 60}s
               </span>
               <button
-                onClick={e => {
-                  e.stopPropagation();
-                  // Assuming you have a deleteTimer function in your context
-                  deleteTimer(timer.id);
-                }}
-                className="border-none bg-transparent text-gray-500 hover:text-red-500 transition p-1 delete-task inline-flex items-center"
+              onClick={e => {
+                e.stopPropagation();
+                deleteTimer(timer.id);
+              }}
+              className="border-none bg-transparent text-gray-700 hover:text-red-500 transition p-1 delete-task inline-flex items-center mr-1"
               >
-                <ion-icon name="trash-bin-sharp" />
+              <ion-icon name="trash-bin-sharp" />
               </button>
             </div>
-          </li>
+            </li>
         ))}
       </ul>
     </main>
