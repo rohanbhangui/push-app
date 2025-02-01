@@ -30,3 +30,22 @@ body {
   font-weight: 500;
   font-style: normal;
 }
+
+.mona-sans-main {
+  font-family: "Mona Sans", serif;
+  font-optical-sizing: auto;
+  font-weight: 800;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 125;
+}
+
+.hubot-sans-main {
+  font-family: "Hubot Sans", serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+  font-variation-settings:
+    "wdth" 125;
+  font-feature-settings: "tnum";
+}

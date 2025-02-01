@@ -1,23 +1,40 @@
 import React, { useEffect, useState } from 'react';
+import { useTimerContext } from '../../Context';
 
 type TimerProps = {
   startTime: number;
+  timerIndex: number;
+  timerTitle: string;
 }
 
-const Timer: React.FC<TimerProps> = ({ startTime }) => {
+const Timer: React.FC<TimerProps> = ({ timerIndex, startTime, timerTitle }) => {
   const [time, setTime] = useState(startTime);
   const [isRunning, setIsRunning] = useState(false);
   const [showAddTime, setShowAddTime] = useState(false);
+
+  const { updateTimer } = useTimerContext();
 
   useEffect(() => {
     let timer: ReturnType<typeof setInterval>;
     if (isRunning) {
       timer = setInterval(() => {
-        setTime((prevTime) => (prevTime > 0 ? prevTime - 1 : 0));
+        setTime((prevTime) => {
+          const newTime = prevTime > 0 ? prevTime - 1 : 0;
+          updateTimer(timerIndex, { title: timerTitle, seconds: newTime });
+          return newTime;
+        });
       }, 1000);
     }
     return () => clearInterval(timer);
-  }, [isRunning]);
+  }, [isRunning, timerIndex]);
+
+  useEffect(() => {
+    setTime(startTime);
+  }, [startTime]);
+
+  useEffect(() => {
+    setIsRunning(false);
+  }, [timerIndex]);
 
   const formatTime = (seconds: number) => {
     const minutes = Math.floor(seconds / 60);
@@ -40,11 +57,11 @@ const Timer: React.FC<TimerProps> = ({ startTime }) => {
 
   return (
     <div className="text-center text-9xl">
-      {formatTime(time)}
+      <span className="hubot-sans-main">{formatTime(time)}</span>
       <div className="mt-4 flex justify-center items-center space-x-2">
         <button 
           onClick={handleStartPause}
-          className={`px-4 py-2 w-12 h-12 rounded-full ${isRunning ? 'bg-gray-700' : 'bg-gray-700'} text-white flex items-center justify-center inter-regular text-base ${time === 0 ? 'opacity-33' : ''}`}
+          className={`px-4 py-2 w-12 h-12 rounded-full ${isRunning ? 'bg-gray-700' : 'bg-gray-700'} text-white flex items-center justify-center inter-regular text-base`}
           disabled={time === 0}
         >
           <ion-icon name={isRunning ? 'pause' : 'play'} />
