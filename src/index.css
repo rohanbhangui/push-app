@@ -1,15 +1,14 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @font-face {
   font-family: 'MADE Outer Sans';
-  src: url('./assets/fonts/MADEOuterSans-Bold.woff2') format('woff2'),
-      url('./assets/fonts/MADEOuterSans-Bold.woff') format('woff');
+  src:
+    url('./assets/fonts/MADEOuterSans-Bold.woff2') format('woff2'),
+    url('./assets/fonts/MADEOuterSans-Bold.woff') format('woff');
   font-weight: bold;
   font-style: normal;
   font-display: swap;
 }
-
-
 
 body {
   background: black;
@@ -18,34 +17,32 @@ body {
 }
 
 .inter-regular {
-  font-family: "Inter", serif;
+  font-family: 'Inter', serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
 }
 
 .inter-medium {
-  font-family: "Inter", serif;
+  font-family: 'Inter', serif;
   font-optical-sizing: auto;
   font-weight: 500;
   font-style: normal;
 }
 
 .mona-sans-main {
-  font-family: "Mona Sans", serif;
+  font-family: 'Mona Sans', serif;
   font-optical-sizing: auto;
   font-weight: 800;
   font-style: normal;
-  font-variation-settings:
-    "wdth" 125;
+  font-variation-settings: 'wdth' 125;
 }
 
 .hubot-sans-main {
-  font-family: "Hubot Sans", serif;
+  font-family: 'Hubot Sans', serif;
   font-optical-sizing: auto;
   font-weight: 700;
   font-style: normal;
-  font-variation-settings:
-    "wdth" 125;
-  font-feature-settings: "tnum";
+  font-variation-settings: 'wdth' 125;
+  font-feature-settings: 'tnum';
 }

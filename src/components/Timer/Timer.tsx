@@ -5,9 +5,13 @@ type TimerProps = {
   startTime: number;
   activeTimer: string;
   timerTitle: string;
-}
+};
 
-const Timer: React.FC<TimerProps> = ({ activeTimer, startTime, timerTitle }) => {
+const Timer: React.FC<TimerProps> = ({
+  activeTimer,
+  startTime,
+  timerTitle,
+}) => {
   const [time, setTime] = useState(startTime);
   const [isRunning, setIsRunning] = useState(false);
   const [showAddTime, setShowAddTime] = useState(false);
@@ -18,7 +22,7 @@ const Timer: React.FC<TimerProps> = ({ activeTimer, startTime, timerTitle }) => 
     let timer: ReturnType<typeof setInterval>;
     if (isRunning) {
       timer = setInterval(() => {
-        setTime((prevTime) => {
+        setTime(prevTime => {
           const newTime = prevTime > 0 ? prevTime - 1 : 0;
           updateTimer(activeTimer, { title: timerTitle, seconds: newTime });
           return newTime;
@@ -44,11 +48,12 @@ const Timer: React.FC<TimerProps> = ({ activeTimer, startTime, timerTitle }) => 
 
   const handleStartPause = () => {
     if (time > 0) {
-      setIsRunning((prev) => !prev);
+      setIsRunning(prev => !prev);
     }
   };
 
-  const handleAddTime = (seconds: number) => setTime((prevTime) => Math.min(prevTime + seconds, 5999));
+  const handleAddTime = (seconds: number) =>
+    setTime(prevTime => Math.min(prevTime + seconds, 5999));
 
   const handleStop = () => {
     setIsRunning(false);
@@ -59,23 +64,53 @@ const Timer: React.FC<TimerProps> = ({ activeTimer, startTime, timerTitle }) => 
     <div className="text-center text-9xl">
       <span className="hubot-sans-main">{formatTime(time)}</span>
       <div className="mt-4 flex justify-center items-center space-x-2">
-        <button 
+        <button
           onClick={handleStartPause}
           className={`px-4 py-2 w-12 h-12 rounded-full ${isRunning ? 'bg-gray-700' : 'bg-gray-700'} text-white flex items-center justify-center inter-regular text-base`}
           disabled={time === 0}
         >
           <ion-icon name={isRunning ? 'pause' : 'play'} />
         </button>
-        <button onClick={handleStop} className="px-4 py-2 w-12 h-12 bg-red-500 text-white rounded-full flex items-center justify-center inter-regular text-base"><ion-icon name="stop" /></button>
+        <button
+          onClick={handleStop}
+          className="px-4 py-2 w-12 h-12 bg-red-500 text-white rounded-full flex items-center justify-center inter-regular text-base"
+        >
+          <ion-icon name="stop" />
+        </button>
         {showAddTime ? (
           <>
-            <button onClick={() => handleAddTime(15)} className="px-4 py-2 h-12 bg-gray-700 text-white rounded-full flex items-center justify-center inter-regular text-base">+ 15s</button>
-            <button onClick={() => handleAddTime(30)} className="px-4 py-2 h-12 bg-gray-700 text-white rounded-full flex items-center justify-center inter-regular text-base">+ 30s</button>
-            <button onClick={() => handleAddTime(300)} className="px-4 py-2 h-12 bg-gray-700 text-white rounded-full flex items-center justify-center inter-regular text-base">+ 5m</button>
-            <button onClick={() => setShowAddTime(false)} className="px-4 py-2 h-12 bg-transparent text-gray-700 rounded-full flex items-center justify-center inter-regular text-base"><ion-icon name="close-sharp" /></button>
+            <button
+              onClick={() => handleAddTime(15)}
+              className="px-4 py-2 h-12 bg-gray-700 text-white rounded-full flex items-center justify-center inter-regular text-base"
+            >
+              + 15s
+            </button>
+            <button
+              onClick={() => handleAddTime(30)}
+              className="px-4 py-2 h-12 bg-gray-700 text-white rounded-full flex items-center justify-center inter-regular text-base"
+            >
+              + 30s
+            </button>
+            <button
+              onClick={() => handleAddTime(300)}
+              className="px-4 py-2 h-12 bg-gray-700 text-white rounded-full flex items-center justify-center inter-regular text-base"
+            >
+              + 5m
+            </button>
+            <button
+              onClick={() => setShowAddTime(false)}
+              className="px-4 py-2 h-12 bg-transparent text-gray-700 rounded-full flex items-center justify-center inter-regular text-base"
+            >
+              <ion-icon name="close-sharp" />
+            </button>
           </>
         ) : (
-          <button onClick={() => setShowAddTime(true)} className="px-4 py-2 h-12 bg-gray-700 text-white rounded-full flex items-center justify-center inter-regular text-base">Add Time</button>
+          <button
+            onClick={() => setShowAddTime(true)}
+            className="px-4 py-2 h-12 bg-gray-700 text-white rounded-full flex items-center justify-center inter-regular text-base"
+          >
+            Add Time
+          </button>
         )}
       </div>
     </div>

@@ -1,11 +1,11 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
 
-export type Timer =  {
+export type Timer = {
   id: string;
   title: string;
   seconds: number;
-}
+};
 
 interface TimerContextType {
   timers: Timer[];
@@ -32,21 +32,25 @@ export const TimerProvider: React.FC<TimerProviderProps> = ({ children }) => {
 
   const addTimer = (timer: Omit<Timer, 'id'>) => {
     const newTimer = { ...timer, id: uuid() };
-    setTimers((prevTimers) => [...prevTimers, newTimer]);
+    setTimers(prevTimers => [...prevTimers, newTimer]);
   };
 
   const updateTimer = (id: string, updatedTimer: Omit<Timer, 'id'>) => {
-    setTimers((prevTimers) =>
-      prevTimers.map((timer) => (timer.id === id ? { ...updatedTimer, id } : timer))
+    setTimers(prevTimers =>
+      prevTimers.map(timer =>
+        timer.id === id ? { ...updatedTimer, id } : timer,
+      ),
     );
   };
 
   const deleteTimer = (id: string) => {
-    setTimers((prevTimers) => prevTimers.filter((timer) => timer.id !== id));
+    setTimers(prevTimers => prevTimers.filter(timer => timer.id !== id));
   };
 
   return (
-    <TimerContext.Provider value={{ timers, addTimer, updateTimer, deleteTimer }}>
+    <TimerContext.Provider
+      value={{ timers, addTimer, updateTimer, deleteTimer }}
+    >
       {children}
     </TimerContext.Provider>
   );
