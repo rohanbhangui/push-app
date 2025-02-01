@@ -61,7 +61,7 @@ const Timer: React.FC<TimerProps> = ({
   };
 
   return (
-    <div class="group">
+    <div className="group">
       <div className="text-center text-gray-700">{timerTitle}</div>
       <div className="text-center text-9xl">
         <span className="hubot-sans-main">{formatTime(time)}</span>
