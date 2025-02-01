@@ -46,3 +46,7 @@ body {
   font-variation-settings: 'wdth' 125;
   font-feature-settings: 'tnum';
 }
+
+button {
+  cursor: pointer;
+}

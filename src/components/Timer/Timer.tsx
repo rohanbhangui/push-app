@@ -67,57 +67,58 @@ const Timer: React.FC<TimerProps> = ({
       <span className="hubot-sans-main">{formatTime(time)}</span>
       </div>
 
-      <div className="mt-4 flex justify-center items-center space-x-2">
-      {showAddTime ? (
-        <>
-        <button
-          onClick={() => handleAddTime(15)}
-          className="px-4 py-2 h-12 bg-transparent text-gray-700 rounded-full flex items-center justify-center inter-regular text-base hover:bg-gray-700 hover:text-white transition duration-150 ease-in-out"
-        >
-          + 15s
-        </button>
-        <button
-          onClick={() => handleAddTime(30)}
-          className="px-4 py-2 h-12 bg-transparent text-gray-700 rounded-full flex items-center justify-center inter-regular text-base hover:bg-gray-700 hover:text-white transition duration-150 ease-in-out"
-        >
-          + 30s
-        </button>
-        <button
-          onClick={() => handleAddTime(300)}
-          className="px-4 py-2 h-12 bg-transparent text-gray-700 rounded-full flex items-center justify-center inter-regular text-base hover:bg-gray-700 hover:text-white transition duration-150 ease-in-out"
-        >
-          + 5m
-        </button>
-        <button
-          onClick={() => setShowAddTime(false)}
-          className="px-4 py-2 h-12 bg-transparent text-gray-700 rounded-full flex items-center justify-center inter-regular text-base hover:bg-transparent hover:text-white transition duration-150 ease-in-out"
-        >
-          <ion-icon name="close-sharp" />
-        </button>
-        </>
-      ) : (
-        <>
-        <button
-          onClick={handleStartPause}
-          className={`px-4 py-2 w-12 h-12 rounded-full bg-transparent text-gray-700 flex items-center justify-center inter-regular text-base hover:bg-gray-700 hover:text-white transition duration-150 ease-in-out`}
-          disabled={time === 0}
-        >
-          <ion-icon name={isRunning ? 'pause' : 'play'} />
-        </button>
-        <button
-          onClick={handleStop}
-          className="px-4 py-2 w-12 h-12 bg-transparent text-gray-700 rounded-full flex items-center justify-center inter-regular text-base hover:bg-red-500 hover:text-white transition duration-150 ease-in-out"
-        >
-          <ion-icon name="stop" />
-        </button>
-        <button
-          onClick={() => setShowAddTime(true)}
-          className="px-4 py-1 h-10 bg-transparent text-gray-700 rounded-full flex items-center justify-center inter-regular text-sm hover:bg-gray-700 hover:text-white transition duration-150 ease-in-out"
-        >
-          Add Time
-        </button>
-        </>
-      )}
+      <div className="mt-4 flex justify-center items-center space-x-2 h-12">
+        {showAddTime ? (
+          <>
+          <button
+            onClick={() => setShowAddTime(false)}
+            className="px-1 py-1 h-10 bg-transparent text-gray-700 rounded-full flex items-center justify-center inter-regular text-xl hover:bg-transparent hover:text-white transition duration-150 ease-in-out"
+          >
+            <ion-icon name="arrow-back-sharp"></ion-icon>
+          </button>
+          <button
+            onClick={() => handleAddTime(15)}
+            className="px-4 py-1 h-10 bg-transparent text-gray-700 rounded-full flex items-center justify-center inter-regular text-sm hover:bg-gray-700 hover:text-white transition duration-150 ease-in-out"
+          >
+            + 15s
+          </button>
+          <button
+            onClick={() => handleAddTime(30)}
+            className="px-4 py-1 h-10 bg-transparent text-gray-700 rounded-full flex items-center justify-center inter-regular text-sm hover:bg-gray-700 hover:text-white transition duration-150 ease-in-out"
+          >
+            + 30s
+          </button>
+          <button
+            onClick={() => handleAddTime(300)}
+            className="px-4 py-1 h-10 bg-transparent text-gray-700 rounded-full flex items-center justify-center inter-regular text-sm hover:bg-gray-700 hover:text-white transition duration-150 ease-in-out"
+          >
+            + 5m
+          </button>
+          
+          </>
+        ) : (
+          <>
+          <button
+            onClick={handleStartPause}
+            className={`px-4 py-2 w-12 h-12 rounded-full bg-transparent text-gray-700 flex items-center justify-center inter-regular text-base hover:bg-gray-700 hover:text-white transition duration-150 ease-in-out`}
+            disabled={time === 0}
+          >
+            <ion-icon name={isRunning ? 'pause' : 'play'} />
+          </button>
+          <button
+            onClick={handleStop}
+            className="px-4 py-2 w-12 h-12 bg-transparent text-gray-700 rounded-full flex items-center justify-center inter-regular text-base hover:bg-red-500 hover:text-white transition duration-150 ease-in-out"
+          >
+            <ion-icon name="stop" />
+          </button>
+          <button
+            onClick={() => setShowAddTime(true)}
+            className="px-4 py-1 h-10 bg-transparent text-gray-700 rounded-full flex items-center justify-center inter-regular text-sm hover:bg-gray-700 hover:text-white transition duration-150 ease-in-out"
+          >
+            Add Time
+          </button>
+          </>
+        )}
       </div>
     </>
   );

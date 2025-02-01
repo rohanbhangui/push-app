@@ -32,7 +32,7 @@ const App = () => {
       <Timer
         activeTimer={activeTimer?.id ?? ''}
         timerTitle={activeTimer?.title ?? ''}
-        startTime={activeTimer?.seconds ?? 900}
+        startTime={activeTimer?.seconds ?? 0}
       />
       <div className="mt-4 flex items-center w-full max-w-sm">
         <span className="uppercase text-gray-500 text-sm">Next Up</span>
