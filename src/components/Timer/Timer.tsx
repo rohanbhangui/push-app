@@ -3,11 +3,11 @@ import { useTimerContext } from '../../Context';
 
 type TimerProps = {
   startTime: number;
-  timerIndex: number;
+  activeTimer: string;
   timerTitle: string;
 }
 
-const Timer: React.FC<TimerProps> = ({ timerIndex, startTime, timerTitle }) => {
+const Timer: React.FC<TimerProps> = ({ activeTimer, startTime, timerTitle }) => {
   const [time, setTime] = useState(startTime);
   const [isRunning, setIsRunning] = useState(false);
   const [showAddTime, setShowAddTime] = useState(false);
@@ -20,13 +20,13 @@ const Timer: React.FC<TimerProps> = ({ timerIndex, startTime, timerTitle }) => {
       timer = setInterval(() => {
         setTime((prevTime) => {
           const newTime = prevTime > 0 ? prevTime - 1 : 0;
-          updateTimer(timerIndex, { title: timerTitle, seconds: newTime });
+          updateTimer(activeTimer, { title: timerTitle, seconds: newTime });
           return newTime;
         });
       }, 1000);
     }
     return () => clearInterval(timer);
-  }, [isRunning, timerIndex]);
+  }, [isRunning]);
 
   useEffect(() => {
     setTime(startTime);
@@ -34,7 +34,7 @@ const Timer: React.FC<TimerProps> = ({ timerIndex, startTime, timerTitle }) => {
 
   useEffect(() => {
     setIsRunning(false);
-  }, [timerIndex]);
+  }, [activeTimer]);
 
   const formatTime = (seconds: number) => {
     const minutes = Math.floor(seconds / 60);

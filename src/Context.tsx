@@ -1,14 +1,17 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
+import { v4 as uuid } from 'uuid';
 
-interface Timer {
+export type Timer =  {
+  id: string;
   title: string;
   seconds: number;
 }
 
 interface TimerContextType {
   timers: Timer[];
-  addTimer: (timer: Timer) => void;
-  updateTimer: (index: number, updatedTimer: Timer) => void;
+  addTimer: (timer: Omit<Timer, 'id'>) => void;
+  updateTimer: (id: string, updatedTimer: Omit<Timer, 'id'>) => void;
+  deleteTimer: (id: string) => void;
 }
 
 const TimerContext = createContext<TimerContextType | undefined>(undefined);
@@ -27,18 +30,23 @@ export const TimerProvider: React.FC<TimerProviderProps> = ({ children }) => {
     localStorage.setItem('push_app', JSON.stringify(timers));
   }, [timers]);
 
-  const addTimer = (timer: Timer) => {
-    setTimers((prevTimers) => [...prevTimers, timer]);
+  const addTimer = (timer: Omit<Timer, 'id'>) => {
+    const newTimer = { ...timer, id: uuid() };
+    setTimers((prevTimers) => [...prevTimers, newTimer]);
   };
 
-  const updateTimer = (index: number, updatedTimer: Timer) => {
+  const updateTimer = (id: string, updatedTimer: Omit<Timer, 'id'>) => {
     setTimers((prevTimers) =>
-      prevTimers.map((timer, i) => (i === index ? updatedTimer : timer))
+      prevTimers.map((timer) => (timer.id === id ? { ...updatedTimer, id } : timer))
     );
   };
 
+  const deleteTimer = (id: string) => {
+    setTimers((prevTimers) => prevTimers.filter((timer) => timer.id !== id));
+  };
+
   return (
-    <TimerContext.Provider value={{ timers, addTimer, updateTimer }}>
+    <TimerContext.Provider value={{ timers, addTimer, updateTimer, deleteTimer }}>
       {children}
     </TimerContext.Provider>
   );
