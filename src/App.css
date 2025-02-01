@@ -1,0 +1,7 @@
+.task-list li .delete-task {
+  opacity: 0;
+}
+
+.task-list li:hover .delete-task {
+  opacity: 1;
+}

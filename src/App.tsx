@@ -72,7 +72,7 @@ const App = () => {
           </button>
         </form>
       )}
-      <ul className="mt-4 w-full max-w-sm flex flex-col space-y-2">
+      <ul className="task-list mt-4 w-full max-w-sm flex flex-col space-y-2">
         {timers.map(timer => (
           <li
             key={timer.id}
@@ -80,7 +80,7 @@ const App = () => {
             onClick={() => handleTimerClick(timer.id)}
           >
             <span>{timer.title}</span>
-            <div>
+            <div className="flex">
               <span>
                 {Math.floor(timer.seconds / 60)}m {timer.seconds % 60}s
               </span>
@@ -90,7 +90,7 @@ const App = () => {
                   // Assuming you have a deleteTimer function in your context
                   deleteTimer(timer.id);
                 }}
-                className="border-none bg-transparent text-gray-500 hover:text-white transition p-1"
+                className="border-none bg-transparent text-gray-500 hover:text-red-500 transition p-1 delete-task inline-flex items-center"
               >
                 <ion-icon name="trash-bin-sharp"></ion-icon>
               </button>
